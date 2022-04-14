@@ -14,7 +14,7 @@ function AlcCardView({setViewState}){
             />
 
             <Card name="Vodka" amount="5" price="6.95€"
-                  cols="4" rows="1" 
+                  cols="3" rows="1" 
                   darkerColor={colors.darkCardBackground} color={colors.cardBackground}
                   fileName="vodka.png"
                   urlType="vodka"
@@ -45,7 +45,7 @@ function AlcCardView({setViewState}){
             />
             
             <Card name="43er" amount="5" price="10.20€"
-                  cols="4" rows ="1"
+                  cols="3" rows ="1"
                   darkerColor={colors.darkCardBackground} color={colors.cardBackground}
                   fileName="43er.png"
                   urlType="43er"
