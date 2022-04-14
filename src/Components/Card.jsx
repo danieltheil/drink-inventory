@@ -77,7 +77,7 @@ function DrinkCard(props) {
             <button onClick={() => setAmount(updateAmount(1))}
                     className="
                     h-12 col-span-1
-                    mt-12 mr-8 col-end-10 pl-4 pr-8
+                    mt-12 mr-8 col-end-10 pl-5 pr-8
                     text-2xl font-extrabold
                     rounded-lg" style={{backgroundColor: colors.green, color:colors.darkText}}>
                 +
@@ -132,7 +132,7 @@ function DrinkCard(props) {
                     <button onClick={() => setSecondAmount(updateSecondAmount(1))}
                             className="
                             h-12 col-span-1
-                            mt-12 mr-12 col-end-10 pl-4 pr-8
+                            mt-12 mr-12 col-end-10 pl-5 pr-8
                             text-2xl font-extrabold
                             rounded-lg" style={{backgroundColor: colors.green, color:colors.darkText}}>
                         +

@@ -22,12 +22,14 @@ function MobileMixCardView(props){
                   darkerColor={colors.darkCardBackground} color={colors.cardBackground}
                   fileName="cola.png"
                   urlType="cola"
+                  isMobile={props.isMobile}
                   />
             <Card name="Fanta" amount= "6" price="2.50€"
                   rows="2"
                   darkerColor={colors.darkCardBackground} color={colors.cardBackground}
                   fileName="fanta.png"
                   urlType="fanta"
+                  isMobile={props.isMobile}
                   />
             <Card name="Orange Juice" amount="5" price="8.00€"
                   secondName="Maracuja Juice" secondAmount="5" secondPrice="8.50€"
@@ -37,18 +39,21 @@ function MobileMixCardView(props){
                   darkerColor={colors.darkCardBackground} color={colors.cardBackground}
                   fileName="orange_juice.png"
                   urlType="orange"
+                  isMobile={props.isMobile}
                   />
             <Card name="Sprite" amount="5" price="12.50€"
                   rows ="2"
                   darkerColor={colors.darkCardBackground} color={colors.cardBackground}
                   fileName="sprite.png"
                   urlType="sprite"
+                  isMobile={props.isMobile}
                   />
             <Card name="Dr. Pepper" amount="5" price="10.20€"
                   rows ="2"
                   darkerColor={colors.darkCardBackground} color={colors.cardBackground}
                   fileName="dr_pepper.png"
                   urlType="dr_pepper"
+                  isMobile={props.isMobile}
                   />
             </div>
         </>
