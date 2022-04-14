@@ -38,7 +38,7 @@ function DrinkCard(props) {
                 col-span-${props.cols} 
                 row-span-${props.rows} 
                 text-gray-50
-                m-6 mt-10 ml-12
+                m-6 mt-10 ml-8
                 p-2 rounded-lg 
                 grid grid-rows-8 divide-y divide-gray-800`}
         style={{ border: "none", backgroundColor: props.color }}

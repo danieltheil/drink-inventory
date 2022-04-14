@@ -23,7 +23,7 @@ function App() {
           null :
           (<SideBar cols="col-span-1" viewState={viewState} setViewState={setViewState}/>) 
         }
-        <div className='card-conainer grid grid-cols-10 grid-rows-10 col-span-11 grid-flow-row '>
+        <div className={`card-conainer grid grid-cols-9 grid-rows-10 col-span-${isMobile ? "12" : "11"} grid-flow-row w-full`}>
           { isMobile ? (
               viewState === viewStates.alcoholView ? 
               (<MobileAlcCardView isMobile={isMobile} setViewState={setViewState}/>) :
