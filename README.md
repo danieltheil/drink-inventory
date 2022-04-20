@@ -8,5 +8,5 @@
 - [x] Add API calls to DB/Storage
 - [x] Fetch Data from API on Load
 - [x] cleanup Layouting 
-- [] Refractor URL to API
-- [] Add a Add Drink Button (name, amount, image?)
+- [ ] Refractor URL to API
+- [ ] Add a Add Drink Button (name, amount, image?)
