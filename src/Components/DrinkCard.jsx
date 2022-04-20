@@ -53,7 +53,7 @@ function DrinkCard(props) {
             <div className="image-container
                             ml-8 mt-4 mb-4 mr-8 col-span-3"
                 >
-                <img src={require(`../assets/${props.fileName}`)} alt="gay"
+                <img src={window.location.origin + `/assets/${props.fileName}`} alt="drink"
                     style={{ maxWidth: "120px", maxHeight: "120px" }} />
             </div>
 
