@@ -4,6 +4,9 @@
 *** TODO ***
 - [x] Add Mockup Design
 - [x] Add Basic Mobile Support
-- [ ] Add API calls to DB/Storage
-- [ ] Fetch Data from API on Load
-- [ ] cleanup Layouting 
+- [x] Add API
+- [x] Add API calls to DB/Storage
+- [x] Fetch Data from API on Load
+- [x] cleanup Layouting 
+- [] Refractor URL to API
+- [] Add a Add Drink Button (name, amount, image?)
