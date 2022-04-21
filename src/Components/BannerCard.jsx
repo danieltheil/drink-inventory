@@ -1,9 +1,8 @@
-function BannerCard(props){
-    
-    return (
-        <button
-        onClick={() => props.setViewState(props.viewState)}
-        className={`
+function BannerCard(props) {
+  return (
+    <button
+      onClick={() => props.setViewState(props.viewState)}
+      className={`
             cardContainer 
             ${props.gradient} 
             col-span-${props.cols} 
@@ -13,17 +12,18 @@ function BannerCard(props){
             m-6 mt-10 ml-8
             p-2 rounded-lg 
             grid grid-rows-8`}
-        style={{ border: "none", backgroundColor: props.color }}
-        >
-
-        <div className={`
+      style={{ border: "none", backgroundColor: props.color }}
+    >
+      <div
+        className={`
             content-center
             ${props.isMobile ? "text-lg" : "text-5xl"}
-            font-semibold `}>
-            {props.bannerContent}
-        </div>
-
-    </button>)
+            font-semibold `}
+      >
+        {props.bannerContent}
+      </div>
+    </button>
+  );
 }
 
 export default BannerCard;
