@@ -4,11 +4,11 @@
 ### How to Run:
 - Clone the repository
 - cd into the API directory
-- run "npm install"
-- run "node ."
-- cd back to react app
-- run "npm run build"
-- run "serve -s build" or host the static version from the build directory with your Webserver of choice
+- run `npm install`
+- run `node .`
+- `cd` back to react app
+- run `npm run build`
+- run `serve -s build` or host the static version from the build directory with your Webserver of choice
 ----
 *** TODO ***
 - [x] Add Mockup Design
