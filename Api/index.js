@@ -1,12 +1,14 @@
 const express = require('express');
 const app = express();
 const JSONHandler = require('./JSONHandler');
+const AmazonPriceFetcher = require('./AmazonPriceFetcher');
 const jsonHandler = new JSONHandler();
 
 const drinkTypes = {
     alcohol: 'alc',
     mix : 'mix'
 }
+
 
 app.use(express.json());
 app.use((req, res, next) => {
@@ -47,3 +49,9 @@ let server = app.listen(8081, () => {
     console.log("Example app listening at http://%s:%s", host, port);
 });
 
+
+
+(async () => {
+    const amazonPriceFetcher = new AmazonPriceFetcher();
+    await amazonPriceFetcher.update();
+})();

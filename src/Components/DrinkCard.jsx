@@ -1,6 +1,5 @@
 import { useState } from "react";
 import colors from "../utils/Colors";
-import urls from "../utils/URLs";
 
 function DrinkCard(props) {
   const [modifiedAmount, setAmount] = useState(props.amount);
@@ -92,7 +91,7 @@ function DrinkCard(props) {
 
       <button
         // eslint-disable-next-line no-restricted-globals
-        onClick={() => { location.href = urls[props.urlType]; }}
+        onClick={() => { location.href = props.url; }}
         className="Link Container rounded-b-lg p-1 pt-2 pb-2 mt-4"
         style={{ backgroundColor: props.darkerColor }}
       >

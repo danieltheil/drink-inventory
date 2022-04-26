@@ -35,14 +35,14 @@ function MobileMixCardView(props) {
               <Card
                 name={drink.name}
                 amount={drink.amount}
-                price="5.00€"
+                price={drink.price}
                 key={`${index}`}
                 rows="2"
                 cols="0"
                 darkerColor={colors.darkCardBackground}
                 color={colors.cardBackground}
                 fileName={drink.fileName}
-                urlType={drink.urlType}
+                url={drink.url}
               />
             </>
           );

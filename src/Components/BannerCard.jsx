@@ -12,7 +12,7 @@ function BannerCard(props) {
             m-6 mt-10 ml-8
             p-2 rounded-lg 
             grid grid-rows-8`}
-      style={{ border: "none", backgroundColor: props.color }}
+      style={{ border: "none", backgroundColor: props.color, maxHeight: "85px" }}
     >
       <div
         className={`

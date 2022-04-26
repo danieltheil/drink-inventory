@@ -15,7 +15,7 @@ class JSONHandler{
 
     buildDrinkObjFrom(drink){
         if(!drink.name) throw new Error('name is required');
-        if(!drink.amount && drink.amount != 0) throw new Error('amount is required');
+        if(!drink.amount && drink.amount !== 0) throw new Error('amount is required');
         let parsedName = drink.name.toLowerCase().replace(" ", "_").replace(".", "");
         
 
@@ -23,7 +23,8 @@ class JSONHandler{
             "name" : drink.name,
             "amount": drink.amount,
             "fileName" : `${parsedName}.webp`,
-            "urlType" : `${parsedName}`,
+            "price": drink.price,
+            "url" : drink.url,
             "type" : drink.type,
         };
     }
@@ -42,7 +43,7 @@ class JSONHandler{
 
     writeJSON(drinks){
         let jsonArr = this.buildJSONArr(drinks);
-        this.fs.writeFile(__dirname + '/drinks.json', JSON.stringify(jsonArr), (err) => {
+        this.fs.writeFile(__dirname + '/drinks.json', JSON.stringify(jsonArr),{encoding: 'utf-8', flag: 'w'}, (err) => {
             if (err) throw err;
             console.log('The file has been saved!');
         });

@@ -10,13 +10,14 @@
 - run `npm run build`
 - run `serve -s build` or host the static version from the build directory with your Webserver of choice
 ----
-*** TODO ***
+**TODO**
 - [x] Add Mockup Design
 - [x] Add Basic Mobile Support
 - [x] Add API
 - [x] Add API calls to DB/Storage
 - [x] Fetch Data from API on Load
 - [x] cleanup Layouting 
-- [ ] Refractor URL to API
+- [x] Refractor URL to API
+- [x] Add Amazon price scraper
 - [ ] Add a Add Drink Button (name, amount, image?)
 - [ ] Add a Default Page in case API is not available

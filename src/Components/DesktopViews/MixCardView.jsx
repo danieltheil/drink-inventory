@@ -34,14 +34,14 @@ function MixCardView({ setViewState }) {
             <Card
               name={drink.name}
               amount={drink.amount}
-              price="5.00€"
+              price={drink.price}
               key={`${index}`}
               cols="3"
               rows="1"
               darkerColor={colors.darkCardBackground}
               color={colors.cardBackground}
               fileName={drink.fileName}
-              urlType={drink.urlType}
+              url={drink.url}
             />
           </>
         );
