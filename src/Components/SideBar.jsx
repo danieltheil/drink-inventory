@@ -2,16 +2,16 @@ import colors from "../utils/Colors";
 import viewStates from "../utils/ViewStates";
 import PropTypes from "prop-types";
 
-function SideBar(props) {
+function SideBar({cols, setViewState, viewState}) {
   return (
-    <div className={`${props.cols}`} style={{ backgroundColor: colors.navBar }}>
+    <div className={`${cols}`} style={{ backgroundColor: colors.navBar }}>
       <div className="tab-Container grid grid-rows-10">
         <button
-          onClick={() => props.setViewState(viewStates.alcoholView)}
+          onClick={() => setViewState(viewStates.alcoholView)}
           className="row-span-2 text-2xl pt-4 pb-4 font-semibold"
           style={{
             backgroundColor:
-              props.viewState === viewStates.alcoholView
+              viewState === viewStates.alcoholView
                 ? colors.darkCardBackground
                 : colors.cardBackground,
             color: colors.lightText,
@@ -21,11 +21,11 @@ function SideBar(props) {
         </button>
 
         <button
-          onClick={() => props.setViewState(viewStates.mixView)}
+          onClick={() => setViewState(viewStates.mixView)}
           className="row-span-2 text-2xl pt-8 pb-8 font-semibold"
           style={{
             backgroundColor:
-              props.viewState === viewStates.mixView
+              viewState === viewStates.mixView
                 ? colors.darkCardBackground
                 : colors.cardBackground,
             color: colors.lightText,
