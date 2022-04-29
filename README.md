@@ -19,5 +19,6 @@
 - [x] cleanup Layouting 
 - [x] Refractor URL to API
 - [x] Add Amazon price scraper
+- [x] Add search functionality
 - [ ] Add a Add Drink Button (name, amount, image?)
 - [ ] Add a Default Page in case API is not available
