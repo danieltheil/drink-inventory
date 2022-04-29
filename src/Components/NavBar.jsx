@@ -12,7 +12,7 @@ function NavBar({ setSearchTerm }) {
       <input
         type="text"
         placeholder="Search Drink"
-        className="p-2 bg-slate-100 col-span-5 rounded-lg"
+        className="p-2 bg-slate-100 col-span-5 rounded-lg transition hover:brightness-75"
         name="searchTerm"
         onChange={(e) => {
           setSearchTerm(e.target.value);

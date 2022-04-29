@@ -48,7 +48,9 @@ function DrinkCard({ name, amount, price, color, fileName, url, darkerColor }) {
         <div
           className="image-container
               my-4 mx-8
-              col-span-3"
+              col-span-3
+              transition
+              hover:scale-105"
         >
           <img
             src={window.location.origin + `/assets/${fileName}`}
@@ -62,6 +64,8 @@ function DrinkCard({ name, amount, price, color, fileName, url, darkerColor }) {
           className="
                     h-12
                     mt-12 col-end-8
+                    transition
+                    hover:scale-110
                     text-2xl font-extrabold
                     rounded-lg"
           style={{ backgroundColor: colors.red, color: colors.darkText }}
@@ -74,6 +78,8 @@ function DrinkCard({ name, amount, price, color, fileName, url, darkerColor }) {
           className="
                     h-12
                     mt-12 col-end-10 
+                    transition
+                    hover:scale-110
                     text-2xl font-extrabold
                     rounded-lg"
           style={{ backgroundColor: colors.green, color: colors.darkText }}
@@ -95,7 +101,10 @@ function DrinkCard({ name, amount, price, color, fileName, url, darkerColor }) {
           // eslint-disable-next-line no-restricted-globals
           location.href = url;
         }}
-        className="Link Container rounded-b-lg pt-2 pb-2 mt-4"
+        className="Link Container 
+        pt-2 pb-2 mt-4
+        transition hover:scale-[1.01]
+        rounded-b-lg"
         style={{ backgroundColor: darkerColor }}
       >
         <div className="text-gray-50 text-left ml-8">Amazon Link:</div>
