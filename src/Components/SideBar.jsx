@@ -4,10 +4,7 @@ import PropTypes from "prop-types";
 
 function SideBar(props) {
   return (
-    <div
-      className={`${props.cols}`}
-      style={{ backgroundColor: colors.navBar }}
-    >
+    <div className={`${props.cols}`} style={{ backgroundColor: colors.navBar }}>
       <div className="tab-Container grid grid-rows-10">
         <button
           onClick={() => props.setViewState(viewStates.alcoholView)}

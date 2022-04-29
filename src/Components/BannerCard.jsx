@@ -1,28 +1,37 @@
 import PropTypes from "prop-types";
 
-function BannerCard(props) {
+function BannerCard({
+  setViewState,
+  viewState,
+  cols,
+  rows,
+  bannerContent,
+  gradient,
+  isMobile,
+  color,
+}) {
   return (
     <button
-      onClick={() => props.setViewState(props.viewState)}
+      onClick={() => setViewState(viewState)}
       className={`
             cardContainer 
-            ${props.gradient} 
-            col-span-${props.cols} 
-            row-span-${props.rows} 
+            ${gradient} 
+            col-span-${cols} 
+            row-span-${rows} 
             text-gray-50
             content-center
             m-6 mt-10 ml-8
             p-2 rounded-lg 
             grid grid-rows-8`}
-      style={{ border: "none", backgroundColor: props.color, maxHeight: "85px" }}
+      style={{ border: "none", backgroundColor: color, maxHeight: "85px" }}
     >
       <div
         className={`
             content-center
-            ${props.isMobile ? "text-lg" : "text-5xl"}
+            ${isMobile ? "text-lg" : "text-5xl"}
             font-semibold `}
       >
-        {props.bannerContent}
+        {bannerContent}
       </div>
     </button>
   );

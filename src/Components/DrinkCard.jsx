@@ -2,12 +2,12 @@ import { useState } from "react";
 import colors from "../utils/Colors";
 import PropTypes from "prop-types";
 
-function DrinkCard(props) {
-  const [modifiedAmount, setAmount] = useState(props.amount);
+function DrinkCard({ name, amount, price, color, fileName, url, darkerColor }) {
+  const [modifiedAmount, setAmount] = useState(amount);
 
   function updateAmount(amount) {
     /**update in db */
-    let drink = { name: props.name, amount: modifiedAmount + amount };
+    let drink = { name: name, amount: modifiedAmount + amount };
 
     fetch("http://localhost:8081/addDrink", {
       method: "POST",
@@ -24,23 +24,22 @@ function DrinkCard(props) {
     <div
       className={`
                 cardContainer 
-                col-span-${props.cols} 
-                row-span-${props.rows} 
                 text-gray-50
-                m-6 mt-10 ml-8
-                p-2 rounded-lg 
-                grid grid-rows-8 divide-y divide-gray-800`}
-      style={{ border: "none", backgroundColor: props.color }}
+                m-6 ml-8
+                p-2 rounded-lg
+                col-span-3
+                row-span-1
+                grid divide-y divide-gray-800`}
+      style={{ border: "none", backgroundColor: color }}
     >
       {/* Price of Drink */}
       <div
         className="content-price
             ml-4 mt-4 
-            text-2xl font-semibold
-            row-span-0"
+            text-2xl font-semibold"
         style={{ color: colors.lightText }}
       >
-        {props.price}
+        {price}
       </div>
 
       {/* Button Grid */}
@@ -48,10 +47,11 @@ function DrinkCard(props) {
         {/* Image Container */}
         <div
           className="image-container
-                            ml-8 mt-4 mb-4 mr-8 col-span-3"
+              my-4 mx-8
+              col-span-3"
         >
           <img
-            src={window.location.origin + `/assets/${props.fileName}`}
+            src={window.location.origin + `/assets/${fileName}`}
             alt="drink"
             style={{ maxWidth: "120px", maxHeight: "120px" }}
           />
@@ -60,8 +60,8 @@ function DrinkCard(props) {
         <button
           onClick={() => setAmount(updateAmount(-1))}
           className="
-                    h-12 col-span-1
-                    mt-12 col-end-8 pl-6 pr-8
+                    h-12
+                    mt-12 col-end-8
                     text-2xl font-extrabold
                     rounded-lg"
           style={{ backgroundColor: colors.red, color: colors.darkText }}
@@ -72,8 +72,8 @@ function DrinkCard(props) {
         <button
           onClick={() => setAmount(updateAmount(1))}
           className="
-                    h-12 col-span-1
-                    mt-12 mr-8 col-end-10 pl-5 pr-8
+                    h-12
+                    mt-12 col-end-10 
                     text-2xl font-extrabold
                     rounded-lg"
           style={{ backgroundColor: colors.green, color: colors.darkText }}
@@ -87,21 +87,22 @@ function DrinkCard(props) {
         className="content-info ml-4 mt-2 text-gray-50 "
         style={{ color: colors.lightText }}
       >
-        {props.name}: {modifiedAmount}x
+        {name}: {modifiedAmount}x
       </div>
 
       <button
-        // eslint-disable-next-line no-restricted-globals
-        onClick={() => { location.href = props.url; }}
-        className="Link Container rounded-b-lg p-1 pt-2 pb-2 mt-4"
-        style={{ backgroundColor: props.darkerColor }}
+        onClick={() => {
+          // eslint-disable-next-line no-restricted-globals
+          location.href = url;
+        }}
+        className="Link Container rounded-b-lg pt-2 pb-2 mt-4"
+        style={{ backgroundColor: darkerColor }}
       >
-        <div className="text-gray-50 text-left ml-6">Amazon Link:</div>
+        <div className="text-gray-50 text-left ml-8">Amazon Link:</div>
       </button>
     </div>
   );
 }
-
 
 DrinkCard.propTypes = {
   name: PropTypes.string.isRequired,
