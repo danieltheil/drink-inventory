@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 function BannerCard(props) {
   return (
     <button
@@ -25,5 +27,14 @@ function BannerCard(props) {
     </button>
   );
 }
+
+BannerCard.propTypes = {
+  setViewState: PropTypes.func.isRequired,
+  viewState: PropTypes.string.isRequired,
+  bannerContent: PropTypes.string.isRequired,
+  gradient: PropTypes.string.isRequired,
+  cols: PropTypes.string.isRequired,
+  rows: PropTypes.string.isRequired,
+};
 
 export default BannerCard;

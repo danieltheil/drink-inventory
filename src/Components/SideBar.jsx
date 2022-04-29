@@ -1,10 +1,11 @@
 import colors from "../utils/Colors";
 import viewStates from "../utils/ViewStates";
+import PropTypes from "prop-types";
 
 function SideBar(props) {
   return (
     <div
-      className={`${props.cols} ${props.height}`}
+      className={`${props.cols}`}
       style={{ backgroundColor: colors.navBar }}
     >
       <div className="tab-Container grid grid-rows-10">
@@ -39,5 +40,11 @@ function SideBar(props) {
     </div>
   );
 }
+
+SideBar.propTypes = {
+  setViewState: PropTypes.func.isRequired,
+  viewState: PropTypes.string.isRequired,
+  cols: PropTypes.string.isRequired,
+};
 
 export default SideBar;

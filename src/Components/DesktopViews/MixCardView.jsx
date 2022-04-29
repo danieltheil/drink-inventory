@@ -1,21 +1,10 @@
-import Card from "../DrinkCard";
+import DrinkCard from "../DrinkCard";
 import colors from "../../utils/Colors";
 import BannerCard from "../BannerCard";
 import viewStates from "../../utils/ViewStates";
-import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 
-function MixCardView({ setViewState }) {
-  let [drinks, setDrinks] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const result = await fetch(`http://localhost:8081/drinks/mix`);
-      const data = await result.json();
-      setDrinks(data);
-    };
-    fetchData();
-  }, []);
-
+function MixCardView({ setViewState, drinks, searchTerm }) {
   
   return (
     <>
@@ -28,14 +17,19 @@ function MixCardView({ setViewState }) {
         gradient="bg-gradient-to-r from-purple-400 via-pink-500 to-red-500"
       />
 
-      {drinks.map((drink, index) => {
+      {drinks
+        .filter((drink) =>
+          searchTerm
+            ? drink.name.toLowerCase().includes(searchTerm.toLowerCase())
+            : drink
+        ).map((drink) => {
         return (
           <>
-            <Card
+            <DrinkCard
               name={drink.name}
               amount={drink.amount}
               price={drink.price}
-              key={`${index}`}
+              key={drink.name}
               cols="3"
               rows="1"
               darkerColor={colors.darkCardBackground}
@@ -49,5 +43,10 @@ function MixCardView({ setViewState }) {
     </>
   );
 }
+
+MixCardView.propTypes = {
+  setViewState: PropTypes.func.isRequired,
+  drinks: PropTypes.array,
+};
 
 export default MixCardView;

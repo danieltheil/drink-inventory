@@ -9,19 +9,36 @@ import MixCardView from "./Components/DesktopViews/MixCardView";
 
 import useWindowDimensions from "./utils/WindowDimensionsGrabber";
 import viewStates from "./utils/ViewStates";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { isMobile } from "react-device-detect";
 
 function App() {
   document.body.style.backgroundColor = colors.background;
 
   const [viewState, setViewState] = useState(viewStates.alcoholView);
+  const [drinks, setDrinks] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+
   const { width } = useWindowDimensions();
   const MAX_WIDTH = 1200;
 
+  function fetchDrinks(drinkType){
+    const fetchData = async () => {
+      const result = await fetch(`http://localhost:8081/drinks/${drinkType}`);
+      const data = await result.json();
+      console.log(data);
+      setDrinks(data);
+    };
+    fetchData();
+  }
+  
+  useEffect(() => {
+    fetchDrinks(viewState);
+  },[viewState, searchTerm]);
+
   return (
     <div className="App h-screen">
-      <NavBar />
+      <NavBar setSearchTerm={setSearchTerm} />
       <div
         className="content-container grid grid-cols-12 h-full w-full"
         style={{ backgroundColor: colors.background }}
@@ -34,23 +51,39 @@ function App() {
           />
         )}
 
-        <div className="card-container grid grid-cols-9 grid-rows-10 col-span-11 grid-flow-row">
+        <div className="card-container grid grid-cols-9 grid-rows-10 col-span-11">
           {isMobile || width < MAX_WIDTH ? (
             viewState === viewStates.alcoholView ? (
               <MobileAlcCardView
                 isMobile={ isMobile || width < MAX_WIDTH }
                 setViewState={ setViewState }
-              />
+                drinks={ drinks }
+                setDrinks={ setDrinks }
+                searchTerm={ searchTerm }
+                />
             ) : (
               <MobileMixCardView
                 isMobile={isMobile || width < MAX_WIDTH}
                 setViewState={ setViewState }
-              />
+                drinks={ drinks }
+                setDrinks={ setDrinks }
+                searchTerm={ searchTerm }
+                />
             )
           ) : viewState === viewStates.alcoholView ? (
-            <AlcCardView setViewState={ setViewState } />
+            <AlcCardView 
+              setViewState={ setViewState } 
+              drinks={ drinks }
+              setDrinks={ setDrinks }
+              searchTerm={ searchTerm }
+            />
           ) : (
-            <MixCardView setViewState={ setViewState } />
+            <MixCardView 
+              setViewState={ setViewState }
+              drinks={ drinks }
+              setDrinks={ setDrinks }
+              searchTerm={ searchTerm }
+            />
           )}
         </div>
       </div>

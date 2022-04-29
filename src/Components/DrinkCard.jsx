@@ -1,5 +1,6 @@
 import { useState } from "react";
 import colors from "../utils/Colors";
+import PropTypes from "prop-types";
 
 function DrinkCard(props) {
   const [modifiedAmount, setAmount] = useState(props.amount);
@@ -100,5 +101,18 @@ function DrinkCard(props) {
     </div>
   );
 }
+
+
+DrinkCard.propTypes = {
+  name: PropTypes.string.isRequired,
+  price: PropTypes.string.isRequired,
+  amount: PropTypes.number.isRequired,
+  color: PropTypes.string.isRequired,
+  darkerColor: PropTypes.string.isRequired,
+  cols: PropTypes.string.isRequired,
+  rows: PropTypes.string.isRequired,
+  fileName: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired,
+};
 
 export default DrinkCard;

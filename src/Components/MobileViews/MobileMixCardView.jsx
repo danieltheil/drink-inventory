@@ -1,22 +1,11 @@
-import Card from "../DrinkCard";
+import DrinkCard from "../DrinkCard";
 import colors from "../../utils/Colors";
 import BannerCard from "../BannerCard";
 import viewStates from "../../utils/ViewStates";
-import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+
 
 function MobileMixCardView(props) {
-  let [drinks, setDrinks] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const result = await fetch(`http://localhost:8081/drinks/mix`);
-      const data = await result.json();
-      setDrinks(data);
-    };
-    fetchData();
-  }, []);
-
-  
   return (
     <>
       <div className="grid grid-rows-10 w-screen h-max">
@@ -29,14 +18,19 @@ function MobileMixCardView(props) {
           isMobile={props.isMobile}
         />
 
-        {drinks.map((drink, index) => {
+        {props.drinks
+        .filter((drink) =>
+          props.searchTerm
+            ? drink.name.toLowerCase().includes(props.searchTerm.toLowerCase())
+            : drink
+        ).map((drink) => {
           return (
             <>
-              <Card
+              <DrinkCard
                 name={drink.name}
                 amount={drink.amount}
                 price={drink.price}
-                key={`${index}`}
+                key={drink.name}
                 rows="2"
                 cols="0"
                 darkerColor={colors.darkCardBackground}
@@ -51,5 +45,11 @@ function MobileMixCardView(props) {
     </>
   );
 }
+
+MobileMixCardView.propTypes = {
+  setViewState: PropTypes.func.isRequired,
+  isMobile: PropTypes.bool.isRequired,
+  drinks: PropTypes.array,
+};
 
 export default MobileMixCardView;
