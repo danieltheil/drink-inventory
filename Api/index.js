@@ -3,14 +3,18 @@ const app = express();
 const JSONHandler = require('./JSONHandler');
 const AmazonPriceFetcher = require('./AmazonPriceFetcher');
 const jsonHandler = new JSONHandler();
+const { createImages } = require('./ImageHandler');
+
 
 const drinkTypes = {
     alcohol: 'alc',
-    mix : 'mix'
+    mix: 'mix'
 }
 
+app.use(express.json({
+    limit: '50mb'
+}));
 
-app.use(express.json());
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Credentials', 'true');
@@ -30,17 +34,24 @@ app.get('/drinks/mix', (req, res) => {
 });
 
 
+app.get('/drinks/images', (req, res) => {
+    res.send(jsonHandler.getImageMap());
+});
+
+
 app.post('/drinks', (req, res) => {
-    let status = jsonHandler.writeDrinks(req.body); 
+    let status = jsonHandler.writeDrinks(req.body);
     res.status(status);
     res.send();
 });
 
+
 app.post('/addDrink', (req, res) => {
     let status = jsonHandler.addDrinkToJSON(req.body);
-    res.status(status); 
+    res.status(status);
     res.send();
 })
+
 
 let server = app.listen(8081, () => {
     let host = server.address().address;
@@ -52,6 +63,7 @@ let server = app.listen(8081, () => {
 
 
 (async () => {
+    createImages(jsonHandler.getDrinks());
     const amazonPriceFetcher = new AmazonPriceFetcher();
     await amazonPriceFetcher.update();
 })();

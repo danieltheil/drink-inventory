@@ -1,9 +1,10 @@
 const puppeteer = require('puppeteer');
 const JSONHandler = require('./JSONHandler');
+const { getBase64ImageFrom } = require('./ImageHandler');
 
-class AmazonPriceFetcher{
+class AmazonPriceFetcher {
 
-  async getPriceBy(url){
+  async getPriceBy(url) {
     if (!url) return "N/A";
     try {
       let browser = await puppeteer.launch();
@@ -15,22 +16,22 @@ class AmazonPriceFetcher{
       console.log(price);
       await browser.close();
       return price.includes('€') || price.includes('$') ? price : 'N/A';
-    }catch(err){
+    } catch (err) {
       console.log(err);
       return 'N/A';
     }
   }
 
-  async updateJSON(){
+  async updateJSON() {
     let jsonHandler = new JSONHandler();
     let drinks = jsonHandler.getDrinks();
     let newDrinks = [];
-    for(let drink of drinks){
+    for (let drink of drinks) {
       newDrinks.push({
         name: drink.name,
         amount: drink.amount,
-        fileName: drink.fileName,
         price: await this.getPriceBy(drink.url),
+        imageBase64: getBase64ImageFrom(drink.name),
         url: drink.url,
         type: drink.type
       })
@@ -38,7 +39,7 @@ class AmazonPriceFetcher{
     jsonHandler.writeJSON(newDrinks);
   }
 
- 	async update(){
+  async update() {
     await this.updateJSON();
     setTimeout(async () => await this.update(), 1000 * 60 * 60)
   }
