@@ -21,5 +21,7 @@
 - [x] Add Amazon price scraper
 - [x] Add search functionality
 - [x] Add routing
-- [ ] Add a Add Drink Button (name, amount, image?)
-- [ ] Add a Default Page in case API is not available
+- [x] Add a Add Drink Button (name, amount, image?)
+- [x] Add a Default Page in case API is not available
+- [ ] Add Remove Drink Button
+- [ ] Add visual Form validation
