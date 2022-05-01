@@ -41,7 +41,17 @@ function resizeImage(width, height, fileName) {
 }
 
 function createImages(drinks){
-    drinks.forEach(drink =>saveImage(drink.name, drink.imageBase64));
+    drinks.forEach(drink => saveImage(drink.name, drink.imageBase64));
+}
+
+function deleteImages(drink){
+    try{
+        let sanitizedName = drink.name.toLowerCase().replace(" ", "_").replace(".", "")
+        fs.unlinkSync(path.join(__dirname + `/images/${sanitizedName}.png`));
+        fs.unlinkSync(path.join(__dirname + `/images/small_${sanitizedName}.png`));
+    }catch(err){
+        console.log("failed to delete image files");
+    }
 }
 
 
@@ -49,5 +59,6 @@ module.exports = {
     saveImage,
     getBase64ImageFrom,
     resizeImage, 
-    createImages
+    createImages,
+    deleteImages
 }

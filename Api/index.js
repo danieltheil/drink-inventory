@@ -39,7 +39,7 @@ app.get('/drinks/images', (req, res) => {
 });
 
 
-app.post('/drinks', (req, res) => {
+app.delete('/drink', (req, res) => {
     let status = jsonHandler.writeDrinks(req.body);
     res.status(status);
     res.send();

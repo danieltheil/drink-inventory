@@ -1,4 +1,4 @@
-const { saveImage, getBase64ImageFrom } = require('./ImageHandler');
+const { saveImage, getBase64ImageFrom, deleteImages } = require('./ImageHandler');
 let path = require('path');
 
 class JSONHandler {
@@ -65,9 +65,11 @@ class JSONHandler {
     }
 
 
-    writeDrinks(drinks) {
+    delteDrink(drink) {
+        let filteredDrinks = this.getDrinks().filter(elem => elem.name !== drink.name);
+        deleteImages(drink);
         try {
-            this.writeJSON(drinks);
+            this.writeJSON(filteredDrinks);
             return 201;
         } catch (err) {
             console.log(err);
@@ -99,5 +101,6 @@ class JSONHandler {
         }
     }
 }
+
 
 module.exports = JSONHandler;
