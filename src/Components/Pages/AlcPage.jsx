@@ -6,16 +6,20 @@ import SideBar from "../SideBar";
 
 import useWindowDimensions from "../../utils/WindowDimensionsGrabber";
 import { isMobile } from "react-device-detect";
+import viewStates from "../../utils/ViewStates";
 
-function AlcPage({ setViewState, drinks, searchTerm, viewState }) {
+function AlcPage({ setViewState, drinks, searchTerm, viewState, imageMap }) {
   const { width } = useWindowDimensions();
   const MAX_WIDTH = 1200;
+  //sets view state to right view when user reloads route
+  setViewState(viewStates.alcoholView);
 
   return (
     <>
       {isMobile || width < MAX_WIDTH ? null : (
         <SideBar
           cols="col-span-1"
+          isAlcoholic={true}
           viewState={viewState}
           setViewState={setViewState}
         />
@@ -28,12 +32,14 @@ function AlcPage({ setViewState, drinks, searchTerm, viewState }) {
             setViewState={setViewState}
             drinks={drinks}
             searchTerm={searchTerm}
+            imageMap={imageMap}
           />
         ) : (
           <AlcCardView
             setViewState={setViewState}
             drinks={drinks}
             searchTerm={searchTerm}
+            imageMap={imageMap}
           />
         )}
       </div>

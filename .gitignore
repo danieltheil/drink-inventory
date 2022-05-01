@@ -5,6 +5,8 @@
 /.pnp
 .pnp.js
 /Api/node_modules
+/Api/images
+/Api/images - Kopie
 /Api/drinks copy.json
 # testing
 /coverage

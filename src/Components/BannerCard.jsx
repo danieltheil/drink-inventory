@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 function BannerCard({
   setViewState,
@@ -7,16 +7,15 @@ function BannerCard({
   cols,
   rows,
   bannerContent,
-  gradient,
-  isMobile,
   color,
 }) {
   return (
-    <Link to={`/${viewState}`}
+    <Link
+      to={`/${viewState}`}
       onClick={() => setViewState(viewState)}
       className={`
             cardContainer 
-            ${gradient} 
+            bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 
             col-span-${cols} 
             row-span-${rows} 
             text-gray-50
@@ -27,12 +26,17 @@ function BannerCard({
             hover:scale-[1.01]
             p-2 rounded-lg 
             grid grid-rows-8`}
-      style={{ border: "none", backgroundColor: color, maxHeight: "85px" }}
+      style={{
+        border: "none",
+        backgroundColor: color,
+        maxHeight: "85px",
+        minHeight: "85px",
+      }}
     >
       <div
         className={`
             content-center
-            ${isMobile ? "text-lg" : "text-5xl"}
+            text-4xl
             font-semibold `}
       >
         {bannerContent}

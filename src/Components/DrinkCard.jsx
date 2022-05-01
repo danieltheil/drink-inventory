@@ -1,19 +1,16 @@
 import { useState } from "react";
-import colors from "../utils/Colors";
 import PropTypes from "prop-types";
 
-function DrinkCard({ name, amount, price, color, fileName, url, darkerColor }) {
-  const [modifiedAmount, setAmount] = useState(amount);
+import colors from "../utils/Colors";
+import { addDrink } from "../utils/ApiHandler";
+
+function DrinkCard({ paramDrink, image }) {
+  const [modifiedAmount, setAmount] = useState(paramDrink.amount);
 
   function updateAmount(amount) {
-    /**update in db */
-    let drink = { name: name, amount: modifiedAmount + amount };
-
-    fetch("http://localhost:8081/addDrink", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(drink),
-    })
+    let drink = { name: paramDrink.name, amount: modifiedAmount + amount };
+  
+    addDrink(drink)
       .then((res) => console.log(res.status))
       .catch((err) => console.log(err));
 
@@ -30,7 +27,7 @@ function DrinkCard({ name, amount, price, color, fileName, url, darkerColor }) {
                 col-span-3
                 row-span-1
                 grid divide-y divide-gray-800`}
-      style={{ border: "none", backgroundColor: color }}
+      style={{ border: "none", backgroundColor: colors.cardBackground }}
     >
       {/* Price of Drink */}
       <div
@@ -39,7 +36,7 @@ function DrinkCard({ name, amount, price, color, fileName, url, darkerColor }) {
             text-2xl font-semibold"
         style={{ color: colors.lightText }}
       >
-        {price}
+        {paramDrink.price}
       </div>
 
       {/* Button Grid */}
@@ -53,7 +50,7 @@ function DrinkCard({ name, amount, price, color, fileName, url, darkerColor }) {
               hover:scale-105"
         >
           <img
-            src={window.location.origin + `/assets/${fileName}`}
+            src={`${image}`}
             alt="drink"
             style={{ maxWidth: "120px", maxHeight: "120px" }}
           />
@@ -93,19 +90,19 @@ function DrinkCard({ name, amount, price, color, fileName, url, darkerColor }) {
         className="content-info ml-4 mt-2 text-gray-50 "
         style={{ color: colors.lightText }}
       >
-        {name}: {modifiedAmount}x
+        {paramDrink.name}: {modifiedAmount}x
       </div>
 
       <button
         onClick={() => {
           // eslint-disable-next-line no-restricted-globals
-          location.href = url;
+          location.href = paramDrink.url;
         }}
         className="Link Container 
         pt-2 pb-2 mt-4
         transition hover:scale-[1.01]
         rounded-b-lg"
-        style={{ backgroundColor: darkerColor }}
+        style={{ backgroundColor: colors.darkCardBackground }}
       >
         <div className="text-gray-50 text-left ml-8">Amazon Link:</div>
       </button>
@@ -114,15 +111,8 @@ function DrinkCard({ name, amount, price, color, fileName, url, darkerColor }) {
 }
 
 DrinkCard.propTypes = {
-  name: PropTypes.string.isRequired,
-  price: PropTypes.string.isRequired,
-  amount: PropTypes.number.isRequired,
-  color: PropTypes.string.isRequired,
-  darkerColor: PropTypes.string.isRequired,
-  cols: PropTypes.string.isRequired,
-  rows: PropTypes.string.isRequired,
-  fileName: PropTypes.string.isRequired,
-  url: PropTypes.string.isRequired,
+  paramDrink: PropTypes.object.isRequired,
+  image: PropTypes.string.isRequired,
 };
 
 export default DrinkCard;
