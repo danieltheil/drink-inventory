@@ -6,7 +6,7 @@
 - cd into the API directory
 - run `npm install`
 - run `node .`
-- `cd` back to react app
+- in another terminal `cd` back to react app
 - run `npm run build`
 - run `serve -s build` or host the static version from the build directory with your Webserver of choice
 ----
@@ -20,5 +20,6 @@
 - [x] Refractor URL to API
 - [x] Add Amazon price scraper
 - [x] Add search functionality
+- [x] Add routing
 - [ ] Add a Add Drink Button (name, amount, image?)
 - [ ] Add a Default Page in case API is not available
