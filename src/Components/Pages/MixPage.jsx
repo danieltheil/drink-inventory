@@ -4,13 +4,12 @@ import MobileMixCardView from "../Views/MobileViews/MobileMixCardView";
 import MixCardView from "../Views/DesktopViews/MixCardView";
 import SideBar from "../SideBar";
 
-import useWindowDimensions from "../../utils/WindowDimensionsGrabber";
+import { MAX_WIDTH, useWindowDimensions } from "../../utils/WindowDimensionsGrabber";
 import { isMobile } from "react-device-detect";
 import viewStates from "../../utils/ViewStates";
 
-function MixPage({ setViewState, drinks, searchTerm, viewState, imageMap }) {
+function MixPage({ setViewState, searchTerm, viewState }) {
   const { width } = useWindowDimensions();
-  const MAX_WIDTH = 1200;
   //sets view state to right view when user reloads route
   setViewState(viewStates.mixView);
 
@@ -30,17 +29,10 @@ function MixPage({ setViewState, drinks, searchTerm, viewState, imageMap }) {
           <MobileMixCardView
             isMobile={isMobile || width < MAX_WIDTH}
             setViewState={setViewState}
-            drinks={drinks}
             searchTerm={searchTerm}
-            imageMap={imageMap}
           />
         ) : (
-          <MixCardView
-            setViewState={setViewState}
-            drinks={drinks}
-            searchTerm={searchTerm}
-            imageMap={imageMap}
-          />
+          <MixCardView setViewState={setViewState} searchTerm={searchTerm} />
         )}
       </div>
     </>
@@ -51,8 +43,6 @@ MixPage.propTypes = {
   setViewState: PropTypes.func.isRequired,
   viewState: PropTypes.string,
   searchTerm: PropTypes.string,
-  drinks: PropTypes.array,
-  imageMap: PropTypes.object,
 };
 
 export default MixPage;

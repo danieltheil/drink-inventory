@@ -23,5 +23,5 @@
 - [x] Add routing
 - [x] Add a Add Drink Button (name, amount, image?)
 - [x] Add a Default Page in case API is not available
-- [ ] Add Remove Drink Button
+- [x] Add Remove Drink Button
 - [ ] Add visual Form validation

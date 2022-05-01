@@ -2,8 +2,12 @@ import DrinkCard from "../../DrinkCard";
 import BannerCard from "../../BannerCard";
 import viewStates from "../../../utils/ViewStates";
 import PropTypes from "prop-types";
+import { useContext } from "react";
+import { DrinkContext } from "../../../utils/Context";
 
-function MobileAlcCardView({ setViewState, isMobile, drinks, searchTerm, imageMap}) {
+function MobileAlcCardView({ setViewState, isMobile, searchTerm }) {
+  const context = useContext(DrinkContext);
+
   return (
     <>
       <div className="grid grid-rows-10 w-screen h-max">
@@ -14,19 +18,22 @@ function MobileAlcCardView({ setViewState, isMobile, drinks, searchTerm, imageMa
           cols="3"
           bannerContent="⇨ Goto Drinks for Mixing! 🥤"
           isMobile={isMobile}
+          key={"mobile_alc_banner"}
         />
 
-        {drinks
+        {context.mixDrinks
           .filter((drink) =>
             searchTerm
               ? drink.name.toLowerCase().includes(searchTerm.toLowerCase())
               : drink
           )
-          .map((drink, index) => {
+          .map((drink) => {
             return (
-              <>
-                <DrinkCard paramDrink={drink} key={index} image={imageMap[drink.name]} />
-              </>
+              <DrinkCard
+                paramDrink={drink}
+                key={"mobile_" + drink.name}
+                image={context.imageMap[drink.name]}
+              />
             );
           })}
       </div>
@@ -37,9 +44,7 @@ function MobileAlcCardView({ setViewState, isMobile, drinks, searchTerm, imageMa
 MobileAlcCardView.propTypes = {
   setViewState: PropTypes.func.isRequired,
   isMobile: PropTypes.bool.isRequired,
-  drinks: PropTypes.array,
   searchTerm: PropTypes.string,
-  imageMap: PropTypes.object,
 };
 
 export default MobileAlcCardView;

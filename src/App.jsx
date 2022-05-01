@@ -1,5 +1,6 @@
 import colors from "./utils/Colors";
 import { fetchDrinks, fetchImages } from "./utils/ApiHandler";
+import { DrinkContext } from "./utils/Context";
 
 import MixPage from "./Components/Pages/MixPage";
 import AlcPage from "./Components/Pages/AlcPage";
@@ -21,6 +22,14 @@ function App() {
   const [mixDrinks, setMixDrinks] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
+  const drinkContextPayLoad = {
+    alcDrinks: alcDrinks,
+    mixDrinks: mixDrinks,
+    setAlcDrinks: setAlcDrinks,
+    setMixDrinks: setMixDrinks,
+    imageMap: imageMap,
+    setImageMap: setImageMap,
+  }
 
   useEffect(() => {
     fetchImages(setImageMap);
@@ -28,20 +37,14 @@ function App() {
 
 
   useEffect(() => {
-    fetchDrinks(setAlcDrinks, setMixDrinks);
+    fetchDrinks({ setAlcDrinks: setAlcDrinks, setMixDrinks: setMixDrinks });
   }, [viewState]);
 
   return (
     <Router>
       <div className="App h-screen">
-        <NavBar setSearchTerm={setSearchTerm} 
-          mixDrinks={mixDrinks}
-          alcDrinks={alcDrinks}
-          setMixDrinks={setMixDrinks}
-          setAlcDrinks={setAlcDrinks} 
-          imageMap={imageMap}
-          setImageMap={setImageMap}
-          />
+        <DrinkContext.Provider value={ drinkContextPayLoad }>
+        <NavBar setSearchTerm={setSearchTerm} />
         <div
           className="content-container grid grid-cols-12 h-full w-full"
           style={{ backgroundColor: colors.background }}
@@ -55,8 +58,6 @@ function App() {
                   viewState={viewState}
                   setViewState={setViewState}
                   searchTerm={searchTerm}
-                  drinks={alcDrinks}
-                  imageMap={imageMap}
                 />
               }
             />
@@ -69,8 +70,6 @@ function App() {
                   viewState={viewState}
                   setViewState={setViewState}
                   searchTerm={searchTerm}
-                  drinks={alcDrinks}
-                  imageMap={imageMap}
                 />
               }
             />
@@ -83,13 +82,12 @@ function App() {
                   viewState={viewState}
                   setViewState={setViewState}
                   searchTerm={searchTerm}
-                  drinks={mixDrinks}
-                  imageMap={imageMap}
                 />
               }
             />
           </Routes>
         </div>
+      </DrinkContext.Provider >
       </div>
     </Router>
   );

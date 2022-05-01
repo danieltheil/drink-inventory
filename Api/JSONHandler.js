@@ -4,7 +4,6 @@ let path = require('path');
 class JSONHandler {
     fs = require('fs');
 
-
     getDrinksByType(type) {
         let drinks = JSON.parse(this.fs.readFileSync(path.join(__dirname + '/drinks.json'), 'utf8'));
         drinks = drinks.filter(drink => drink.type === type);
@@ -17,6 +16,7 @@ class JSONHandler {
         return JSON.parse(this.fs.readFileSync(path.join(__dirname + '/drinks.json'), 'utf8'));
     }
 
+
     getImageMap() {
         let drinks = this.getDrinks();
         let imageMap = {};
@@ -25,6 +25,7 @@ class JSONHandler {
         }
         return imageMap;
     }
+
 
     buildDrinkObjFrom(drink) {
         if (!drink.name) throw new Error('name is required');

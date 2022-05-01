@@ -1,20 +1,27 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import PropTypes from "prop-types";
 
 import colors from "../utils/Colors";
-import { addDrink } from "../utils/ApiHandler";
+import { DrinkContext } from "../utils/Context";
+import { fetchDrinks, deleteDrink, updateDrink } from "../utils/ApiHandler";
+import { MAX_WIDTH, useWindowDimensions } from "../utils/WindowDimensionsGrabber";
+import { isMobile } from "react-device-detect";
 
 function DrinkCard({ paramDrink, image }) {
   const [modifiedAmount, setAmount] = useState(paramDrink.amount);
+  const { width } = useWindowDimensions();
+
+  const context = useContext(DrinkContext);
 
   function updateAmount(amount) {
     let drink = { name: paramDrink.name, amount: modifiedAmount + amount };
-  
-    addDrink(drink)
-      .then((res) => console.log(res.status))
-      .catch((err) => console.log(err));
-
+    updateDrink(drink);
     return parseInt(modifiedAmount) + amount;
+  }
+
+  function handleDelete(drinkName) {
+    fetchDrinks(context);
+    deleteDrink({ name: drinkName }, context);
   }
 
   return (
@@ -30,13 +37,27 @@ function DrinkCard({ paramDrink, image }) {
       style={{ border: "none", backgroundColor: colors.cardBackground }}
     >
       {/* Price of Drink */}
-      <div
-        className="content-price
-            ml-4 mt-4 
-            text-2xl font-semibold"
-        style={{ color: colors.lightText }}
-      >
-        {paramDrink.price}
+      <div className="grid grid-cols-10">
+        <div
+          className="content-price
+          ml-4 mt-4 pb-2
+          text-2xl font-semibold"
+          style={{ color: colors.lightText }}
+        >
+          {paramDrink.price ? paramDrink.price : "N/A"}
+        </div>
+        <button
+          className={`
+          rounded
+          transition hover:scale-110
+          text-l font-semibold
+          mx-${isMobile || width < MAX_WIDTH ? "4" : "4"} my-2 col-start-10
+          `}
+          style={{ backgroundColor: colors.red, color: colors.darkText, width: "40px", height: "40px" }}
+          onClick={() => handleDelete(paramDrink.name)}
+        >
+          X
+        </button>
       </div>
 
       {/* Button Grid */}
@@ -46,8 +67,7 @@ function DrinkCard({ paramDrink, image }) {
           className="image-container
               my-4 mx-8
               col-span-3
-              transition
-              hover:scale-105"
+              transition hover:scale-105"
         >
           <img
             src={`${image}`}
@@ -61,8 +81,7 @@ function DrinkCard({ paramDrink, image }) {
           className="
                     h-12
                     mt-12 col-end-8
-                    transition
-                    hover:scale-110
+                    transition hover:scale-110
                     text-2xl font-extrabold
                     rounded-lg"
           style={{ backgroundColor: colors.red, color: colors.darkText }}

@@ -3,20 +3,11 @@ import PropTypes from "prop-types";
 
 import Popup from "reactjs-popup";
 import PopupForm from "./Popup/PopupForm";
-import useWindowDimensions from "../utils/WindowDimensionsGrabber";
+import { MAX_WIDTH, useWindowDimensions } from "../utils/WindowDimensionsGrabber";
 import { isMobile } from "react-device-detect";
 
-function NavBar({
-  setSearchTerm,
-  mixDrinks,
-  setMixDrinks,
-  alcDrinks,
-  setAlcDrinks,
-  setImageMap,
-  imageMap,
-}) {
+function NavBar({ setSearchTerm }) {
   const { width } = useWindowDimensions();
-  const MAX_WIDTH = 1200;
 
   return (
     <div
@@ -40,6 +31,7 @@ function NavBar({
       ></input>
 
       <Popup
+        closeOnEscape={ true }
         trigger={
           <button
             className={`
@@ -56,27 +48,14 @@ function NavBar({
           </button>
         }
       >
-        <PopupForm
-          alcDrinks={alcDrinks}
-          setAlcDrinks={setAlcDrinks}
-          mixDrinks={mixDrinks}
-          setMixDrinks={setMixDrinks}
-          imageMap={imageMap}
-          setImageMap={setImageMap}
-        />
+        <PopupForm />
       </Popup>
     </div>
   );
 }
 
 NavBar.propTypes = {
-  setSearchTerm: PropTypes.func.isRequired,
-  mixDrinks: PropTypes.array.isRequired,
-  setMixDrinks: PropTypes.func.isRequired,
-  alcDrinks: PropTypes.array.isRequired,
-  setAlcDrinks: PropTypes.func.isRequired,
-  imageMap: PropTypes.object.isRequired,
-  setImageMap: PropTypes.func.isRequired,
+  setSearchTerm: PropTypes.func.isRequired
 };
 
 export default NavBar;

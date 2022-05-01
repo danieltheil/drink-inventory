@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 
+const MAX_WIDTH = 1200;
+
 function getWindowDimensions() {
   const {
     innerWidth: width,
@@ -9,7 +11,8 @@ function getWindowDimensions() {
   return { width, height};
 }
 
-export default function useWindowDimensions() {
+
+function useWindowDimensions() {
   const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
 
   useEffect(() => {
@@ -22,4 +25,9 @@ export default function useWindowDimensions() {
   }, []);
 
   return windowDimensions;
+}
+
+export {
+  useWindowDimensions,
+  MAX_WIDTH
 }

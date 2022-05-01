@@ -1,11 +1,11 @@
 import colors from "../../utils/Colors";
-import PropTypes from "prop-types";
 
 import viewStates from "../../utils/ViewStates";
 import { getBase64 } from "../../utils/Base64";
 import { addDrink } from "../../utils/ApiHandler";
+import { DrinkContext } from "../../utils/Context";
 
-import { useState } from "react";
+import { useState, useContext } from "react";
 
 import NameFormInput from "./FormInputs/NameFormInput";
 import AmountFormInput from "./FormInputs/AmountFormInput";
@@ -14,19 +14,14 @@ import ImageFormInput from "./FormInputs/ImageFormInput";
 import TypeFormInput from "./FormInputs/TypeFormInputs";
 import SubmitButton from "./FormInputs/SubmitButton";
 
-function PopupForm({
-  setAlcDrinks,
-  alcDrinks,
-  setMixDrinks,
-  mixDrinks,
-  imageMap,
-  setImageMap,
-}) {
+function PopupForm() {
   const [name, setName] = useState("");
   const [amount, setAmount] = useState(0);
   const [url, setURL] = useState("");
   const [imageFile, setImageFile] = useState("");
   const [type, setType] = useState(viewStates.alcoholView);
+
+  const context = useContext(DrinkContext);
 
   function isValid(formInputType) {
     switch (formInputType) {
@@ -57,7 +52,6 @@ function PopupForm({
     if (!isValidFormInput) return;
 
     getBase64(imageFile).then((base64) => {
-      console.log(base64.substring(0, 100));
       let newDrink = {
         name: name,
         amount: amount,
@@ -65,23 +59,7 @@ function PopupForm({
         url: url,
         type: type,
       };
-
-      addDrink(newDrink)
-        .then((res) => {
-          if (res.status === 201) {
-            //update imageMap with uploaded image
-            imageMap[newDrink.name] = newDrink.imageBase64;
-            setImageMap(imageMap);
-            if (type === viewStates.alcoholView) {
-              setAlcDrinks([...alcDrinks, newDrink]);
-            } else {
-              setMixDrinks([...mixDrinks, newDrink]);
-            }
-          }
-          console.log(res.status);
-          console.log("form submitted");
-        })
-        .catch((err) => console.log(err));
+      addDrink(newDrink, context)
     });
   }
 
@@ -107,14 +85,5 @@ function PopupForm({
     </div>
   );
 }
-
-PopupForm.propTypes = {
-  setAlcDrinks: PropTypes.func.isRequired,
-  alcDrinks: PropTypes.array.isRequired,
-  setMixDrinks: PropTypes.func.isRequired,
-  mixDrinks: PropTypes.array.isRequired,
-  imageMap: PropTypes.object.isRequired,
-  setImageMap: PropTypes.func.isRequired,
-};
 
 export default PopupForm;

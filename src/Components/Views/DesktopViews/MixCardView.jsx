@@ -2,8 +2,12 @@ import DrinkCard from "../../DrinkCard";
 import BannerCard from "../../BannerCard";
 import viewStates from "../../../utils/ViewStates";
 import PropTypes from "prop-types";
+import { useContext } from "react";
+import { DrinkContext } from "../../../utils/Context";
 
-function MixCardView({ setViewState, drinks, searchTerm, imageMap}) {
+function MixCardView({ setViewState, searchTerm }) {
+  const context = useContext(DrinkContext);
+
   return (
     <>
       <BannerCard
@@ -12,20 +16,23 @@ function MixCardView({ setViewState, drinks, searchTerm, imageMap}) {
         cols="11"
         rows="1"
         bannerContent="⇨ Goto Alcoholic Drinks! 🍺"
+        key={"mix_banner"}
       />
 
       <div className="drink-card-container grid grid-cols-9 grid-rows-2 col-span-9 row-span-3">
-        {drinks
+        {context.mixDrinks
           .filter((drink) =>
             searchTerm
               ? drink.name.toLowerCase().includes(searchTerm.toLowerCase())
               : drink
           )
-          .map((drink, index) => {
+          .map((drink) => {
             return (
-              <>
-                <DrinkCard paramDrink={drink} key={index} image={imageMap[drink.name]} />
-              </>
+              <DrinkCard
+                paramDrink={drink}
+                key={drink.name}
+                image={context.imageMap[drink.name]}
+              />
             );
           })}
       </div>
@@ -35,9 +42,7 @@ function MixCardView({ setViewState, drinks, searchTerm, imageMap}) {
 
 MixCardView.propTypes = {
   setViewState: PropTypes.func.isRequired,
-  drinks: PropTypes.array,
   searchTerm: PropTypes.string,
-  imageMap : PropTypes.object,
 };
 
 export default MixCardView;

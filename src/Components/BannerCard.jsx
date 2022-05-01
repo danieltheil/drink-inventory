@@ -49,7 +49,6 @@ BannerCard.propTypes = {
   setViewState: PropTypes.func.isRequired,
   viewState: PropTypes.string.isRequired,
   bannerContent: PropTypes.string.isRequired,
-  gradient: PropTypes.string.isRequired,
   cols: PropTypes.string.isRequired,
   rows: PropTypes.string.isRequired,
 };

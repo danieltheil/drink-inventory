@@ -4,13 +4,12 @@ import MobileAlcCardView from "../Views/MobileViews/MobileAlcCardView";
 import AlcCardView from "../Views/DesktopViews/AlcCardView";
 import SideBar from "../SideBar";
 
-import useWindowDimensions from "../../utils/WindowDimensionsGrabber";
+import { MAX_WIDTH, useWindowDimensions } from "../../utils/WindowDimensionsGrabber";
 import { isMobile } from "react-device-detect";
 import viewStates from "../../utils/ViewStates";
 
-function AlcPage({ setViewState, drinks, searchTerm, viewState, imageMap }) {
+function AlcPage({ setViewState, searchTerm, viewState }) {
   const { width } = useWindowDimensions();
-  const MAX_WIDTH = 1200;
   //sets view state to right view when user reloads route
   setViewState(viewStates.alcoholView);
 
@@ -30,17 +29,10 @@ function AlcPage({ setViewState, drinks, searchTerm, viewState, imageMap }) {
           <MobileAlcCardView
             isMobile={isMobile || width < MAX_WIDTH}
             setViewState={setViewState}
-            drinks={drinks}
             searchTerm={searchTerm}
-            imageMap={imageMap}
           />
         ) : (
-          <AlcCardView
-            setViewState={setViewState}
-            drinks={drinks}
-            searchTerm={searchTerm}
-            imageMap={imageMap}
-          />
+          <AlcCardView setViewState={setViewState} searchTerm={searchTerm} />
         )}
       </div>
     </>
@@ -51,7 +43,6 @@ AlcPage.propTypes = {
   setViewState: PropTypes.func.isRequired,
   viewState: PropTypes.string,
   searchTerm: PropTypes.string,
-  drinks: PropTypes.array,
 };
 
 export default AlcPage;
