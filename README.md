@@ -24,4 +24,5 @@
 - [x] Add a Add Drink Button (name, amount, image?)
 - [x] Add a Default Page in case API is not available
 - [x] Add Remove Drink Button
-- [ ] Add visual Form validation
+- [x] Add visual Form validation
+- [x] Add PWA Support
