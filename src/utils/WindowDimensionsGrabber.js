@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const MAX_WIDTH = 1200;
+const MAX_WIDTH = 1500;
 
 function getWindowDimensions() {
   const {
