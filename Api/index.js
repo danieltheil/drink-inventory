@@ -4,7 +4,11 @@ const JSONHandler = require('./JSONHandler');
 const AmazonPriceFetcher = require('./AmazonPriceFetcher');
 const jsonHandler = new JSONHandler();
 const { createImages } = require('./ImageHandler');
-
+const fs = require('fs');
+const http = require('http');
+const https = require('https');
+// const key = fs.readFileSync('"E:\\cert\\privateKey.key"', 'utf8');
+// const cert = fs.readFileSync('"E:\\cert\\certificate.crt"', 'utf8');
 
 const drinkTypes = {
     alcohol: 'alc',
@@ -52,14 +56,11 @@ app.post('/addDrink', (req, res) => {
     res.send();
 })
 
+const httpServer = http.createServer(app);
+// const httpsServer = https.createServer({key: key, cert: cert}, app);
 
-let server = app.listen(8081, () => {
-    let host = server.address().address;
-    console.log(host)
-    let port = server.address().port;
-    console.log("Example app listening at http://%s:%s", host, port);
-});
-
+httpServer.listen(8080);
+// httpsServer.listen(8443);
 
 
 (async () => {

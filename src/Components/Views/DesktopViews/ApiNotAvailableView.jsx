@@ -9,7 +9,7 @@ function ApiNotAvailableView() {
           className="block text-2xl font-semibold mt-4"
           style={{ color: colors.lightText }}
         >
-          API is no available...
+          API is not available...
         </h1>
       </div>
     </div>

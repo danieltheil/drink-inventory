@@ -7,7 +7,7 @@ class AmazonPriceFetcher {
   async getPriceBy(url) {
     if (!url) return "N/A";
     try {
-      let browser = await puppeteer.launch();
+      var browser = await puppeteer.launch();
       let page = await browser.newPage();
       await page.goto(url);
       const html = await page.content();
@@ -19,6 +19,8 @@ class AmazonPriceFetcher {
     } catch (err) {
       console.log(err);
       return 'N/A';
+    }finally{
+      await browser.close();
     }
   }
 

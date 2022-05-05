@@ -8,6 +8,7 @@
 /Api/images
 /Api/images - Kopie
 /Api/drinks copy.json
+/Api/ssl/*
 # testing
 /coverage
 

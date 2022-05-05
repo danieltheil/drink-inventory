@@ -59,7 +59,7 @@ function DrinkCard({ paramDrink, image, animationDuration }) {
         <div
           className="content-price
           ml-4 mt-4 pb-2
-          text-2xl font-semibold"
+          text-xl font-semibold"
           style={{ color: colors.lightText }}
         >
           {paramDrink.price ? paramDrink.price : "N/A"}
@@ -68,7 +68,8 @@ function DrinkCard({ paramDrink, image, animationDuration }) {
           className={`
           rounded
           transition hover:scale-110 hover:-translate-y-[0.125rem] duration-[200ms]
-          text-l font-semibold
+          text-md font-semibold
+          mb-2
           ml-6 my-2
           mx-4 ${
             isMobile || width < MAX_WIDTH ? "col-end-10" : "col-start-11"
@@ -84,7 +85,7 @@ function DrinkCard({ paramDrink, image, animationDuration }) {
           }}
           onClick={() => handleDelete(paramDrink.name)}
         >
-          X
+          x
         </button>
       </div>
 
@@ -108,11 +109,11 @@ function DrinkCard({ paramDrink, image, animationDuration }) {
           onClick={() => setAmount(updateAmount(-1))}
           className="
                     h-12
-                    mt-12 col-end-8
+                    mt-10 col-end-8
                     transition hover:scale-110 duration-[200ms] hover:brightness-[80%]
-                    text-2xl font-extrabold
+                    text-md font-extrabold
                     rounded-lg"
-          style={{ backgroundColor: colors.red, color: colors.darkText }}
+          style={{ backgroundColor: colors.red, color: colors.darkText, maxHeight: "50px" }}
         >
           -
         </button>
@@ -121,11 +122,11 @@ function DrinkCard({ paramDrink, image, animationDuration }) {
           onClick={() => setAmount(updateAmount(1))}
           className="
                     h-12
-                    mt-12 col-end-10 
+                    mt-10 col-end-10 
                     transition hover:scale-110 duration-[200ms] hover:-translate-y-[0.125rem] hover:brightness-[80%]
-                    text-2xl font-extrabold
+                    text-md font-extrabold
                     rounded-lg"
-          style={{ backgroundColor: colors.green, color: colors.darkText }}
+          style={{ backgroundColor: colors.green, color: colors.darkText, maxHeight: "50px" }}
         >
           +
         </button>

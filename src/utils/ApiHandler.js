@@ -1,6 +1,6 @@
 import viewStates from "./ViewStates";
 
-const API_URL = "http://192.168.178.66:8081"
+const API_URL = "http://192.168.178.66:8080";
 
 export function addDrink(newDrink, context) {
     fetch(`${API_URL}/addDrink`, {
