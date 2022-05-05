@@ -1,12 +1,12 @@
-import DrinkCard from "../../DrinkCard";
 import BannerCard from "../../BannerCard";
 import viewStates from "../../../utils/ViewStates";
 import PropTypes from "prop-types";
-import { useContext } from "react";
+import { useContext, lazy, Suspense } from "react";
 import { DrinkContext } from "../../../utils/Context";
 
 function MobileAlcCardView({ setViewState, isMobile, searchTerm }) {
   const context = useContext(DrinkContext);
+  const DrinkCard = lazy(() => import("../../DrinkCard"));
 
   return (
     <>
@@ -21,19 +21,22 @@ function MobileAlcCardView({ setViewState, isMobile, searchTerm }) {
           key={"mobile_alc_banner"}
         />
 
-        {context.mixDrinks
+        {context.alcDrinks
           .filter((drink) =>
             searchTerm
               ? drink.name.toLowerCase().includes(searchTerm.toLowerCase())
               : drink
           )
-          .map((drink) => {
+          .map((drink, index) => {
             return (
-              <DrinkCard
-                paramDrink={drink}
-                key={"mobile_" + drink.name}
-                image={context.imageMap[drink.name]}
-              />
+              <Suspense key={`sus_mobile_${drink.name}`} fallback={<div>Loading Card...</div>}>
+                <DrinkCard
+                  paramDrink={drink}
+                  key={"mobile_" + drink.name}
+                  image={context.imageMap[drink.name]}
+                  animationDuration={index}
+                />
+              </Suspense>
             );
           })}
       </div>

@@ -1,12 +1,12 @@
-import DrinkCard from "../../DrinkCard";
 import BannerCard from "../../BannerCard";
 import viewStates from "../../../utils/ViewStates";
 import PropTypes from "prop-types";
-import { useContext } from "react";
+import { Suspense, useContext, lazy } from "react";
 import { DrinkContext } from "../../../utils/Context";
 
 function MixCardView({ setViewState, searchTerm }) {
   const context = useContext(DrinkContext);
+  const DrinkCard = lazy(() => import("../../DrinkCard"));
 
   return (
     <>
@@ -19,20 +19,23 @@ function MixCardView({ setViewState, searchTerm }) {
         key={"mix_banner"}
       />
 
-      <div className="drink-card-container grid grid-cols-9 grid-rows-2 col-span-9 row-span-3">
+      <div className="drink-card-container grid grid-cols-9 grid-rows-3 col-span-9 row-span-3">
         {context.mixDrinks
           .filter((drink) =>
             searchTerm
               ? drink.name.toLowerCase().includes(searchTerm.toLowerCase())
               : drink
           )
-          .map((drink) => {
+          .map((drink, index) => {
             return (
-              <DrinkCard
-                paramDrink={drink}
-                key={drink.name}
-                image={context.imageMap[drink.name]}
-              />
+              <Suspense key={`sus_${drink.name}`} fallback={<div>Loading Card... </div>}>
+                <DrinkCard
+                  paramDrink={drink}
+                  key={drink.name}
+                  image={context.imageMap[drink.name]}
+                  animationDuration={index}
+                />
+              </Suspense>
             );
           })}
       </div>

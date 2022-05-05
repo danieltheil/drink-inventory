@@ -30,6 +30,6 @@ function TypeFormInput({ setType, type }) {
 TypeFormInput.propTypes = {
   type: PropTypes.string.isRequired,
   setType: PropTypes.func.isRequired,
-}
+};
 
 export default TypeFormInput;

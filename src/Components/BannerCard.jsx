@@ -36,7 +36,7 @@ function BannerCard({
       <div
         className={`
             content-center
-            text-4xl
+            text-3xl
             font-semibold `}
       >
         {bannerContent}
