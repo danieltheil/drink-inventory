@@ -12,5 +12,8 @@ RUN npm run build
 #frontend
 FROM nginx:1.21.1-alpine as prod
 COPY --from=builder /app/build /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY nginx-cert.crt /etc/nginx/nginx-certificate.crt
+COPY nginx-key.key /etc/nginx/nginx-key.key
+EXPOSE 80 443
+CMD ["nginx", "-c", "/etc/nginx/nginx.conf", "-g", "daemon off;"]

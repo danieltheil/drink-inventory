@@ -58,7 +58,6 @@ export function fetchImages(setImageMap) {
     const fetchData = async () => {
         const result = await fetch(`${API_URL}/drinks/images`);
         const imageMap = await result.json();
-        // console.log(imageMap);
         setImageMap(imageMap);
     };
     fetchData();
