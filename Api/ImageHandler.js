@@ -2,11 +2,13 @@ const fs = require('fs');
 const path = require('path');
 const sharp = require('sharp');
 
+const IMAGE_PATH = path.join(__dirname + "/assets/images/");
+
 function saveImage(drinkName, imageBase64) {
     let sanitizedName = drinkName.toLowerCase().replaceAll(" ", "_").replaceAll(".", "");
     const base64Data = imageBase64.replace(/^data:image\/png;base64,/, "");
     let buff = new Buffer.from(base64Data, 'base64');
-    fs.writeFileSync(path.join(__dirname + `/images/${sanitizedName}.png`), buff);
+    fs.writeFileSync(path.join(`${IMAGE_PATH}${sanitizedName}.png`), buff);
     resizeImage(120, 120, sanitizedName);
 }
 
@@ -14,7 +16,7 @@ function saveImage(drinkName, imageBase64) {
 function getBase64ImageFrom(drinkName) {
     try {
         let sanitizedName = drinkName.toLowerCase().replace(" ", "_").replace(".", "")
-        let base64String = fs.readFileSync(path.join(__dirname + `/images/small_${sanitizedName}.png`), {
+        let base64String = fs.readFileSync(path.join(`${IMAGE_PATH}small_${sanitizedName}.png`), {
             encoding: 'base64'
         });
         if (base64String.substring(0, 100).includes("dataimage/pngbase64")) {
@@ -29,9 +31,9 @@ function getBase64ImageFrom(drinkName) {
 
 function resizeImage(width, height, fileName) {
 
-    sharp(__dirname + `/images/${fileName}.png`).resize(width, height, {
+    sharp(`${IMAGE_PATH}${fileName}.png`).resize(width, height, {
         fit: 'inside'
-    }).toFile(__dirname + `/images/small_${fileName}.png`, (err, info) => {
+    }).toFile(`${IMAGE_PATH}small_${fileName}.png`, (err, info) => {
         if (err) {
             console.log(err);
         } else {
@@ -47,8 +49,8 @@ function createImages(drinks){
 function deleteImages(drink){
     try{
         let sanitizedName = drink.name.toLowerCase().replace(" ", "_").replace(".", "")
-        fs.unlinkSync(path.join(__dirname + `/images/${sanitizedName}.png`));
-        fs.unlinkSync(path.join(__dirname + `/images/small_${sanitizedName}.png`));
+        fs.unlinkSync(path.join(`${IMAGE_PATH}${sanitizedName}.png`));
+        fs.unlinkSync(path.join(`${IMAGE_PATH}small_${sanitizedName}.png`));
     }catch(err){
         console.log("failed to delete image files");
     }

@@ -6,9 +6,11 @@ const jsonHandler = new JSONHandler();
 const { createImages } = require('./ImageHandler');
 const fs = require('fs');
 const http = require('http');
-const https = require('https');
-// const key = fs.readFileSync('"E:\\cert\\privateKey.key"', 'utf8');
-// const cert = fs.readFileSync('"E:\\cert\\certificate.crt"', 'utf8');
+
+//if you want to use https get cert and key and use https server instead (line 63)
+// const https = require('https');
+// const key = fs.readFileSync('KEY_PATH', 'utf8');
+// const cert = fs.readFileSync('CERT_PATH', 'utf8');
 
 const drinkTypes = {
     alcohol: 'alc',
@@ -57,9 +59,9 @@ app.post('/addDrink', (req, res) => {
 })
 
 const httpServer = http.createServer(app);
-// const httpsServer = https.createServer({key: key, cert: cert}, app);
-
 httpServer.listen(8080);
+
+// const httpsServer = https.createServer({key: key, cert: cert}, app);
 // httpsServer.listen(8443);
 
 

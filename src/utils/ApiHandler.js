@@ -1,6 +1,6 @@
 import viewStates from "./ViewStates";
 
-const API_URL = "http://192.168.178.66:8080";
+const API_URL = process.env.REACT_APP_API_URL;
 
 export function addDrink(newDrink, context) {
     fetch(`${API_URL}/addDrink`, {

@@ -7,20 +7,27 @@ class AmazonPriceFetcher {
   async getPriceBy(url) {
     if (!url) return "N/A";
     try {
-      var browser = await puppeteer.launch();
+      var browser = await puppeteer.launch({
+        executablePath: '/usr/bin/google-chrome',
+        args: ['--no-sandbox']
+      });
       let page = await browser.newPage();
       await page.goto(url);
       const html = await page.content();
       let split = html.split('a-offscreen');
-      let price = split[1].substring(split[1].indexOf('>') + 1, split[1].indexOf('<'));
+      let price = split[1]?.substring(split[1].indexOf('>') + 1, split[1].indexOf('<'));
       console.log(price);
       await browser.close();
-      return price.includes('€') || price.includes('$') ? price : 'N/A';
+      return price?.includes('€') || price?.includes('$') ? price : 'N/A';
     } catch (err) {
       console.log(err);
       return 'N/A';
     }finally{
-      await browser.close();
+      try{
+        await browser.close();
+      }catch(err){
+        console.log(err);
+      }
     }
   }
 

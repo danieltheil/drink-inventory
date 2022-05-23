@@ -2,10 +2,12 @@ const { saveImage, getBase64ImageFrom, deleteImages } = require('./ImageHandler'
 const fs = require('fs');
 const path = require('path');
 
+const JSON_PATH = path.join(`${__dirname}/assets/drinks.json`);
+
 class JSONHandler {
 
     getDrinksByType(type) {
-        let drinks = JSON.parse(fs.readFileSync(path.join(__dirname + '/drinks.json'), 'utf8'));
+        let drinks = JSON.parse(fs.readFileSync(JSON_PATH, 'utf8'));
         drinks = drinks.filter(drink => drink.type === type);
         drinks.forEach(drink => delete drink.imageBase64);
         return drinks;
@@ -13,7 +15,7 @@ class JSONHandler {
 
 
     getDrinks() {
-        return JSON.parse(fs.readFileSync(path.join(__dirname + '/drinks.json'), 'utf8'));
+        return JSON.parse(fs.readFileSync(JSON_PATH, 'utf8'));
     }
 
 
@@ -56,7 +58,7 @@ class JSONHandler {
 
     writeJSON(drinks) {
         let jsonArr = this.buildJSONArr(drinks);
-        fs.writeFile(path.join(path.join(__dirname + '/drinks.json')), JSON.stringify(jsonArr), {
+        fs.writeFile(JSON_PATH, JSON.stringify(jsonArr), {
             encoding: 'utf-8',
             flag: 'w'
         }, (err) => {
