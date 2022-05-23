@@ -18,7 +18,7 @@ COPY package.json /opt/app
 COPY package-lock.json /opt/app
 RUN npm install
 
-COPY . .
+COPY ./src .
 
 
 EXPOSE 8080

@@ -9,7 +9,7 @@ RUN npm install
 WORKDIR /app/
 RUN npm run build
 
-#frontend
+#web-server
 FROM nginx:1.21.1-alpine as prod
 COPY --from=builder /app/build /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/nginx.conf
